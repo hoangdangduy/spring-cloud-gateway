@@ -1,0 +1,33 @@
+server:
+  port: 9967
+  http2:
+    enabled: true
+  ssl:
+    key-store: classpath:keystore/key.keystore
+    key-store-password: mypassword
+    key-store-type: PKCS12
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: websocket_route
+          uri: wss://athenader.tcbs.com.vn
+          predicates:
+            - Path=/athena/v1/stream
+logging:
+  level:
+    io:
+      netty: TRACE
+    reactor:
+      netty: TRACE
+    org:
+      springframework:
+        web:
+          reactive:
+            socket: TRACE
+        cloud:
+          gateway: TRACE
+        reactive:
+          socket: TRACE
