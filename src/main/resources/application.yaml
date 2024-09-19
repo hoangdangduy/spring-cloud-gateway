@@ -1,21 +1,16 @@
 server:
-  port: 9967
+  port: 9968
   http2:
     enabled: true
   ssl:
     key-store: classpath:keystore/key.keystore
     key-store-password: mypassword
     key-store-type: PKCS12
+    enabled: true
+#    error when http2 + ssl enabled
 spring:
   application:
     name: gateway
-  cloud:
-    gateway:
-      routes:
-        - id: websocket_route
-          uri: wss://athenader.tcbs.com.vn
-          predicates:
-            - Path=/athena/v1/stream
 logging:
   level:
     io:
