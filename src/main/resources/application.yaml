@@ -11,12 +11,26 @@ server:
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: athenader_route
+          uri: https://apiextaws.tcbs.com.vn
+          predicates:
+            - Path=/athenader/v1/derivatives/**
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "/athenader/v1/derivatives"
+                replacement: "/athenader/v1/derivatives"
+            - name: CustomResponseFilter
+            - SetResponseHeader=content-type, application/json
 logging:
   level:
-    io:
-      netty: TRACE
-    reactor:
-      netty: TRACE
+#    io:
+#      netty: DEBUG
+#    reactor:
+#      netty: DEBUG
     org:
       springframework:
         web:

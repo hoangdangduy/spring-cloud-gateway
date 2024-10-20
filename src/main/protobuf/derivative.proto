@@ -1,0 +1,48 @@
+syntax = "proto3";
+package pb;
+option go_package = "/message";
+
+// Phai sinh
+message Derivative{
+  string symbol = 1;
+
+  double ceilPrice = 2;
+  double floorPrice = 3;
+  double refPrice = 4;
+
+  double bidPrice01 = 5;
+  double bidPrice02 = 6;
+  double bidPrice03 = 7;
+  double bidQtty01 = 8;
+  double bidQtty02 = 9;
+  double bidQtty03 = 10;
+  double offerPrice01 = 11;
+  double offerPrice02 = 12;
+  double offerPrice03 = 13;
+  double offerQtty01 = 14;
+  double offerQtty02 = 15;
+  double offerQtty03 = 16;
+
+  double matchPrice = 17;
+  double matchQtty = 18;
+  double change = 19;
+  double changePercent = 20;
+
+  double open = 21;
+  double high = 22;
+  double low = 23;
+
+  double totalVol = 24;
+  double openVol = 25;
+
+  double buyForeignQtty = 26;
+  double sellForeignQtty = 27;
+
+  string expiryDate = 28;
+  double basis = 29;
+  double avg = 30;
+}
+
+message Derivatives{
+  repeated Derivative data = 1;
+}
