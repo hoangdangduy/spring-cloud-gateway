@@ -1,7 +1,7 @@
 server:
-  port: 9968
+  port: 8080
   http2:
-    enabled: true
+    enabled: false
   ssl:
     key-store: classpath:keystore/key.keystore
     key-store-password: mypassword
@@ -25,12 +25,30 @@ spring:
                 replacement: "/athenader/v1/derivatives"
             - name: CustomResponseFilter
             - SetResponseHeader=content-type, application/json
+        - id: wss_aws_route
+          uri: wss://athenaaws.tcbs.com.vn
+          predicates:
+            - Path=/aws/athena/v1/stream
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "/aws/athena/v1/stream"
+                replacement: "/athena/v1/stream"
+        - id: wss_bank_route
+          uri: wss://athenader.tcbs.com.vn
+          predicates:
+            - Path=/bank/athena/v1/stream
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "/bank/athena/v1/stream"
+                replacement: "/athena/v1/stream"
 logging:
   level:
-#    io:
-#      netty: DEBUG
-#    reactor:
-#      netty: DEBUG
+    io:
+      netty: DEBUG
+    reactor:
+      netty: DEBUG
     org:
       springframework:
         web:
